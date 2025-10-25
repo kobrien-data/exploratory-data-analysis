@@ -1,5 +1,4 @@
 import pandas as pd 
-print(pd.__version__)
 import numpy as np
 import matplotlib.pyplot as py
 import seaborn as sns 
