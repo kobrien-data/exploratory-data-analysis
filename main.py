@@ -5,7 +5,6 @@ import seaborn as sns
 
 df = pd.read_csv("imdb_horror_movies.csv")
 print(df.head())
-print(df.shape)
 print(df.info())
 
 #rename columns for easier access
@@ -25,30 +24,13 @@ df.rename(columns={'Title':'title',
 # Check for missing values
 print(df.isnull().sum())
 
-# Fill missing values in 'genre' with 'Unknown'
-df['genre'].fillna('Unknown', inplace=True)
+for column in df.columns:
+    if df[column].isnull().sum() > 0:
+        if df[column].dtype == 'int' or df[column].dtype == 'float':
+            df[column].fillna(0.00, inplace=True)
+        else:
+            df[column].fillna('Unknown', inplace=True)
 
-# Fill missing values in 'movie_rating' with 'Not Rated'
-df['movie_rating'].fillna('Not Rated', inplace=True)
+print(df.isnull().sum())
 
-# Fill missing values in 'review_rating' with 'Not Rated'
-df['review_rating'].fillna(0.00, inplace=True)
-
-# Fill missing values in 'runtime' with the 'Unknown'
-df['runtime'].fillna('Unknown', inplace=True)
-
-# Fill missing values in 'plot' with the 'Unknown'
-df['plot'].fillna('Unknown', inplace=True)
-
-# Fill missing values in 'cast' with the 'Unknown'
-df['cast'].fillna('Unknown', inplace=True)
-
-# Fill missing values in 'language' with the 'Unknown'
-df['language'].fillna('Unknown', inplace=True)
-
-# Fill missing values in 'filming_locations' with 'Unknown'
-df['filming_locations'].fillna('Unknown', inplace=True)
-
-# Fill missing values in 'budget' with null
-df['budget'].fillna('Unknown', inplace=True)
 
